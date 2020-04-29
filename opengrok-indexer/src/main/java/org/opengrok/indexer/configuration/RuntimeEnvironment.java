@@ -1644,6 +1644,9 @@ public final class RuntimeEnvironment {
             configLock.writeLock().unlock();
         }
 
+        // populate groups at this point to avoid showing empty groups. They will be populated later again
+        populateGroups(getGroups(), new TreeSet<>(getProjects().values()));
+
         // HistoryGuru constructor needs environment properties so no locking is done here.
         HistoryGuru histGuru = HistoryGuru.getInstance();
 
